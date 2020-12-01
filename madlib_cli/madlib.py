@@ -7,22 +7,25 @@ def read_template(path):
     
 def parse(doc):
     reg_exp_questions = re.findall(r"\{(.*?)\}", doc)
-    replace_quesitons = re.sub(r"\{(.*?)\}", "{}", doc)
-    return reg_exp_questions,replace_quesitons
+    return reg_exp_questions
 
 def merge(txt,answers_arr):
     for str_loop in answers_arr:
         txt = txt.replace("{}",str_loop,1)
     return txt
 
-if __name__ == "__main__":
+def write():
     content = read_template(path)
-    reg_exp_questions,replace_quesitons = parse(content)
+    reg_exp_questions = parse(content)
     answers_arr = []
     for questions in reg_exp_questions:
         all_questions = input(f'Enter your {questions} : ')
         answers_arr.append(all_questions)
     result = merge(reg_exp_questions , answers_arr)
+    with open(path, "a") as file_write:
+        file_write.write(result)
 
     print("Lets Fun")
     print(result)
+
+write()
