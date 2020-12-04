@@ -37,6 +37,7 @@ def write(result):
 
 
 if __name__ == '__main__':
+
     content = read_template(path)
     content_parse = parse(content)
     answers_arr = []
