@@ -1,13 +1,13 @@
 
-from madlib_cli.madlib import *
+from madlib_cli.madlib import read_template , parse , merge
 
 """
 test read template : 
 any thing in txt file => should display
 """
 def test_read_template():
-    actual = read_template("/home/hamza/Desktop/401/labs/lab3/madlib-cli/textFiles/began.txt")
-    expected = "Hello every one .. My name is {first name} {last name} and I'm {age} years old . I'm {Adjective} and {Adjective}."
+    actual = read_template("/home/hamza/Desktop/401/labs/lab3/madlib-cli/textFiles/test.txt")
+    expected = "Hello Gys I'm {first name} {last name} => hamza rashed"
     assert actual == expected
 
 """
