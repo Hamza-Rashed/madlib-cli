@@ -15,7 +15,8 @@ def parse(doc):
     returns a string with language parts removed and a separate list of those language parts.
     """
     reg_exp_questions = re.findall(r"\{(.*?)\}", doc)
-    return reg_exp_questions
+    txt = re.sub(r"\{(.*?)\}", "{}", doc)
+    return txt , reg_exp_questions
 
 def merge(txt,answers_arr):
     """
@@ -23,24 +24,26 @@ def merge(txt,answers_arr):
     entered language parts, and returns a string with the language parts inserted into the template.
     """
     for str_loop in answers_arr:
-        txt = txt.replace("{}",str_loop,1)
+        txt = txt.replace("{}",str_loop)
     return txt
 
-def write():
+def write(result):
     """
     Create write function for write a new info inside a new file called finall.txt
     """
-    content = read_template(path)
-    reg_exp_questions = parse(content)
-    answers_arr = []
-    for questions in reg_exp_questions:
-        all_questions = input(f'Enter your {questions} : ')
-        answers_arr.append(all_questions)
-    result = merge(reg_exp_questions , answers_arr)
-    with open(path, "a") as file_write:
+    path_write = '/home/hamza/Desktop/401/labs/lab3/madlib-cli/textFiles/finall.txt'
+    with open(path_write, "a") as file_write:
         file_write.write(result)
 
-    print("Lets Fun")
-    print(result)
 
-write()
+if __name__ == '__main__':
+
+    content = read_template(path)
+    content_parse = parse(content)
+    answers_arr = []
+    for questions in content_parse[1]:
+        all_questions = input(f'Enter your {questions} : ')
+        answers_arr.append(all_questions)
+    result = merge(content_parse[0] , answers_arr)
+    print(result[0:68])
+    write(result[0:68])
