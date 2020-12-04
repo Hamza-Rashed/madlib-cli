@@ -31,18 +31,18 @@ def write(result):
     """
     Create write function for write a new info inside a new file called finall.txt
     """
-    
-    with open(path, "a") as file_write:
+    path_write = '/home/hamza/Desktop/401/labs/lab3/madlib-cli/textFiles/finall.txt'
+    with open(path_write, "a") as file_write:
         file_write.write(result)
 
 
 if __name__ == '__main__':
     content = read_template(path)
-    reg_exp_questions , txt = parse(content)
-    
+    content_parse = parse(content)
     answers_arr = []
-    for questions in reg_exp_questions:
+    for questions in content_parse[1]:
         all_questions = input(f'Enter your {questions} : ')
         answers_arr.append(all_questions)
-    result = merge(txt , answers_arr)
-    write(result)
+    result = merge(content_parse[0] , answers_arr)
+    print(result[0:68])
+    write(result[0:68])
